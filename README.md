@@ -1,6 +1,6 @@
 # Codex-Bot: Chatbot de IA com LLM Local via WhatsApp
 
-Um estudo de caso sobre a integração de um Modelo de Linguagem Grande (LLM) rodando localmente em um chatbot de WhatsApp, construído com Node.js.
+Um estudo de caso sobre a integração de um Modelo de Linguagem Grande (LLM) rodando localmente e APIs em um chatbot de WhatsApp, construído com Node.js.
 
 ## Sobre o Projeto
 
