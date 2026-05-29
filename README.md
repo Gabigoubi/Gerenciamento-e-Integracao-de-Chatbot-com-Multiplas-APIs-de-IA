@@ -1,13 +1,17 @@
-```
+# 🤖 Codex-Bot: Chatbot de Inteligência Artificial para WhatsApp
+
 <p align="center">
   <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
   <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" />
   <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI" />
   <img src="https://img.shields.io/badge/Google%20Gemini-8E75C2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
+  <img src="https://img.shields.io/badge/Groq-F55036?style=for-the-badge&logoColor=white" alt="Groq" />
+  <img src="https://img.shields.io/badge/Llama%203-0064E0?style=for-the-badge&logo=meta&logoColor=white" alt="Llama 3" />
+  <img src="https://img.shields.io/badge/Ollama-000000?style=for-the-badge&logo=ollama&logoColor=white" alt="Ollama" />
 </p>
 
-# Codex-Bot: Chatbot de Inteligência Artificial para WhatsApp
+---
 
 O Codex-Bot é uma aplicação em Node.js que transforma o WhatsApp em uma interface para interação com Modelos de Linguagem (LLMs). O principal diferencial do projeto é sua arquitetura flexível, que permite alternar o motor de inteligência entre um servidor local de IA (garantindo privacidade e custo zero) ou provedores em nuvem de alta performance.
 
@@ -19,7 +23,7 @@ A aplicação possui módulos independentes e fáceis de alternar para os seguin
 
 * **Local (GPT4All / LM Studio):** Permite rodar modelos como Mistral 7B diretamente na máquina de desenvolvimento.
 * **OpenAI:** Integração com o modelo gpt-4o.
-* **Groq:** Utiliza a infraestrutura da Groq para processamento rápido do modelo Llama 3.
+* **Groq:** Utiliza a infraestrutura da Groq para velocidade máxima com o modelo Llama 3.
 * **Google Gemini:** Integração com o Gemini 1.5 Pro utilizando o gerenciamento de chat nativo do SDK.
 
 ---
