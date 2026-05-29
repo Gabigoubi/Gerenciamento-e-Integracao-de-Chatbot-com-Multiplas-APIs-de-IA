@@ -1,30 +1,101 @@
-# Codex-Bot: Chatbot de IA com LLM Local via WhatsApp
+```
+<p align="center">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" alt="WhatsApp" />
+  <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white" alt="OpenAI" />
+  <img src="https://img.shields.io/badge/Google%20Gemini-8E75C2?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini" />
+</p>
 
-Um estudo de caso sobre a integração de um Modelo de Linguagem Grande (LLM) rodando localmente e APIs em um chatbot de WhatsApp, construído com Node.js.
+# Codex-Bot: Chatbot de Inteligência Artificial para WhatsApp
 
-## Sobre o Projeto
+O Codex-Bot é uma aplicação em Node.js que transforma o WhatsApp em uma interface para interação com Modelos de Linguagem (LLMs). O principal diferencial do projeto é sua arquitetura flexível, que permite alternar o motor de inteligência entre um servidor local de IA (garantindo privacidade e custo zero) ou provedores em nuvem de alta performance.
 
-Este projeto é um chatbot funcional que opera através do WhatsApp, utilizando a biblioteca `whatsapp-web.js`. O seu diferencial é a capacidade de se conectar a um "cérebro" de IA rodando 100% localmente, através de um servidor como o GPT4All ou LM Studio.
+---
 
-O desenvolvimento foi conduzido de uma forma moderna: atuei como **Arquiteto da Solução e Engenheiro de Depuração**, utilizando uma IA generativa para a criação do código base e focando meu esforço na parte mais crítica do projeto: a **integração entre o cliente do WhatsApp e o servidor de IA local, e a resolução de problemas complexos** nesse fluxo.
+## Motores de IA Suportados
+
+A aplicação possui módulos independentes e fáceis de alternar para os seguintes provedores:
+
+* **Local (GPT4All / LM Studio):** Permite rodar modelos como Mistral 7B diretamente na máquina de desenvolvimento.
+* **OpenAI:** Integração com o modelo gpt-4o.
+* **Groq:** Utiliza a infraestrutura da Groq para processamento rápido do modelo Llama 3.
+* **Google Gemini:** Integração com o Gemini 1.5 Pro utilizando o gerenciamento de chat nativo do SDK.
+
+---
+
+## Abordagem de Desenvolvimento
+
+O projeto foi construído utilizando Inteligência Artificial generativa para a criação do código base. O foco humano e o esforço de engenharia foram direcionados para o papel de Arquiteto da Solução e Engenheiro de Depuração, concentrando-se na resolução de problemas de integração, tratamento de assincronismo e estabilidade da comunicação entre o cliente do WhatsApp e os servidores de IA.
+
+---
+
+## Soluções de Engenharia Aplicadas
+
+Para garantir o funcionamento estável do robô sem travar o aplicativo ou estourar os limites das APIs, as seguintes lógicas foram implementadas:
+
+* **Gerenciamento de Histórico Multiusuário:** Uso de estruturas do tipo Map para isolar o histórico de conversa de cada usuário ou grupo de forma independente.
+* **Janela Deslizante de Contexto:** O bot mantém apenas as últimas mensagens na memória para evitar lentidão. A lógica garante que as instruções iniciais do sistema (System Prompt) nunca sejam apagadas ao limpar o histórico antigo.
+* **Controle de Escopo em Grupos:** Em conversas privadas, o bot responde a todas as mensagens. Em grupos, ele ignora o fluxo geral e só é ativado se for diretamente mencionado ou se responderem a uma mensagem enviada por ele.
+* **Filtro de Backlog (Mensagens Antigas):** Quando o servidor é iniciado, ele ignora todas as mensagens recebidas enquanto estava offline, evitando responder em massa mensagens passadas.
+* **Feedback de Interface (UX):** O bot aciona o estado de "Digitando..." no WhatsApp enquanto aguarda a resposta da API de IA, fornecendo um indicador visual para o usuário.
+* **Trava de Segurança (Guardrail):** Filtro que bloqueia mensagens com mais de 2000 caracteres para evitar sobrecarga no processamento dos modelos.
+
+---
 
 ## Tecnologias Utilizadas
 
 * **Ambiente:** Node.js
-* **Gerenciamento de Pacotes:** NPM
-* **Módulos Principais:**
-    * `whatsapp-web.js` - para a conexão com o WhatsApp
-    * `axios` - para as requisições à API REST do servidor local
-    * `dotenv` - para o gerenciamento de variáveis de ambiente
-    * `qrcode-terminal` - para a autenticação no WhatsApp
-* **IA:** Modelo LLM local (ex: Mistral 7B) servido via GPT4All
+* **Comunicação WhatsApp:** whatsapp-web.js
+* **Requisições HTTP:** Axios
+* **SDKs Oficiais:** openai, groq-sdk, @google/generative-ai
+* **Autenticação via Terminal:** qrcode-terminal
+* **Variáveis de Ambiente:** dotenv
 
-## Desafios e Aprendizados
+---
 
-O principal desafio deste projeto não foi a geração do código, mas a complexa tarefa de **estabelecer uma comunicação estável entre sistemas distintos**: o cliente do WhatsApp e o servidor de IA rodando na mesma máquina. O processo de 4 dias para resolver bugs de compatibilidade, gerenciar dependências e garantir que as requisições fossem enviadas e recebidas corretamente foi uma imersão profunda em:
+## Como Executar o Projeto
 
-* **Resolução de Problemas Complexos:** Identificar e corrigir erros em um ecossistema com múltiplas partes assíncronas.
-* **Gerenciamento de Ambiente Local:** Configurar e manter um ambiente Node.js e um servidor de IA local funcionando em conjunto.
-* **Comunicação via API:** Entender na prática o fluxo de uma requisição HTTP REST para uma aplicação local.
+### Pré-requisitos
+* Node.js instalado na máquina.
+* Caso utilize o modo local: GPT4All ou LM Studio rodando uma API local compatível com o formato da OpenAI.
+* Caso utilize nuvem: Chaves de API correspondentes (OpenAI, Groq ou Gemini).
 
-Este projeto foi a prova de que a habilidade mais valiosa no desenvolvimento de software não é apenas escrever código, mas garantir que sistemas complexos funcionem juntos de forma robusta e confiável.
+### Instalação
+
+1. Clone o repositório para sua máquina local.
+2. Acesse a pasta do projeto e instale as dependências:
+```bash
+npm install
+
+```
+
+3. Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis (preencha conforme o motor escolhido):
+
+```env
+API_URL=http://localhost:4891/v1/chat/completions
+SYSTEM_PROMPT="Sua instrução de comportamento para o bot aqui"
+OPENAI_API_KEY=seu_token_aqui
+GROQ_API_KEY=seu_token_aqui
+GEMINI_API_KEY=seu_token_aqui
+
+```
+
+4. Inicie a aplicação com o comando:
+
+```bash
+node src/index.js
+
+```
+
+5. Escaneie o QR Code gerado no terminal utilizando o WhatsApp do seu celular.
+
+---
+
+## Licença
+
+Este projeto está sob a licença ISC.
+
+```
+
+```
